@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: my-app-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/enable-access-log: "true"
+
+spec:
+  ingressClassName: public-iks-k8s-nginx
+  tls:
+  - hosts:
+    - group-04-3e4769f510db5aaf1089354e49621b41-0000.au-syd.containers.appdomain.cloud
+    secretName: group-04-3e4769f510db5aaf1089354e49621b41-0000    
+  rules:
+    - host: group-04-3e4769f510db5aaf1089354e49621b41-0000.au-syd.containers.appdomain.cloud
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: my-app-service
+                port:
+                  number: 80

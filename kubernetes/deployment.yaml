@@ -1,0 +1,85 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-app
+  labels:
+    app: my-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: my-app
+  template:
+    metadata:
+      labels:
+        app: my-app
+    spec:
+      containers:
+        - name: my-app-container
+          # image: ttl.sh/codeshareeshivaamm:5h
+          image: ttl.sh/codeshareeshivvaam:6h
+          ports:
+            - containerPort: 3000
+          env:
+            - name: REDIS_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: my-app-secret
+                  key: REDIS_USERNAME
+            - name: REDIS_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: my-app-secret
+                  key: REDIS_PASSWORD
+            - name: REDIS_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: my-app-secret
+                  key: REDIS_HOST
+            - name: REDIS_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: my-app-secret
+                  key: REDIS_PORT
+            - name: REDIS_CA_CERTIFICATE
+              valueFrom:
+                secretKeyRef:
+                  name: my-app-secret
+                  key: REDIS_CA_CERTIFICATE
+            - name: NEXT_PUBLIC_FIREBASE_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: my-app-secret
+                  key: NEXT_PUBLIC_FIREBASE_API_KEY
+            - name: NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN
+              valueFrom:
+                secretKeyRef:
+                  name: my-app-secret
+                  key: NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN
+            - name: NEXT_PUBLIC_FIREBASE_PROJECT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: my-app-secret
+                  key: NEXT_PUBLIC_FIREBASE_PROJECT_ID
+            - name: NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET
+              valueFrom:
+                secretKeyRef:
+                  name: my-app-secret
+                  key: NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET
+            - name: NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID
+              valueFrom:
+                secretKeyRef:
+                  name: my-app-secret
+                  key: NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID
+            - name: NEXT_PUBLIC_FIREBASE_APP_ID
+              valueFrom:
+                secretKeyRef:
+                  name: my-app-secret
+                  key: NEXT_PUBLIC_FIREBASE_APP_ID
+            - name: GEMINI_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: my-app-secret       
+                  key: GEMINI_API_KEY         
+            
+          
